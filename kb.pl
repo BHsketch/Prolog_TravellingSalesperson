@@ -45,7 +45,14 @@ path(e, g, 7).
 
 travel(Start, End, PathSoFar) :-
 	nb_setval(numOfNodes, 7),
-	travel(Start, End, PathSoFar, numOfNodes).
+	nb_setval(shortestPathLength, 1000), % setting some arbitrarily high initial value for shortestPathLength
+	nb_setval(shortestPath, [j, k, l, m, n, o, p, q]), % empty list as initial value for shortests path
+
+	travel(Start, End, PathSoFar, numOfNodes),
+
+	write(' shortest path: '),
+	nb_getval(shortestPath, ShortestPath),
+	print_list(ShortestPath).
 
 % ------- BASE AND RECURSIVE CASES FOR PRINTING ELEMENTS IN A LIST -------
 print_list(List) :-
@@ -77,9 +84,9 @@ travel(Start, End, PathSoFar, numOfNodes) :-
 
 	length(PathSoFar1, PathSoFar1Length),
 	nb_getval(numOfNodes, NumberOfNodes),
-	PathSoFar1Length =:= NumberOfNodes,
+	PathSoFar1Length =:= NumberOfNodes.
 
-	print_list(PathSoFar1).
+	%print_list(PathSoFar1).
 
 travel(Start, End, PathSoFar, numOfNodes) :-
 	%format('recursive case travel with Start = ~w, End = ~w, and PathSoFar = ~w', [Start, End, PathSoFar]),
